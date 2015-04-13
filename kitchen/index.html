@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Kitchen</title>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <!-- Web Components Polyfils -->
+    <script src="components/webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="imports/kitchen.html">
+
+    <style>
+        html,body {
+            height: 100%;
+            margin: 0;
+            background-color: #e5e5e5;
+            font-family: 'Grand Hotel', sans-serif;
+        }
+
+        core-toolbar{
+            background:#EF6C00;
+            color: #fff;
+        }
+
+        core-menu{
+            margin: 0 auto;
+            color:#6E6E6E;
+            /*border-bottom:solid 1px #E3E3E3;*/
+            border-top:solid 1px #E6E6E6;
+        }
+
+        core-menu paper-item{
+            margin:10px 5px;
+        }
+
+        paper-item core-icon{
+            margin-right:7px;
+        }
+
+        paper-item a{
+            text-decoration:none !important;
+            color:#6E6E6E;
+        }
+
+        #sensor_grid{
+            padding:3.6% 0 3.6% 0;
+            padding-left:3.6%;
+        }
+
+        #side-nav{
+            background:#FAFAFA;
+        }
+
+        #side-nav core-toolbar{
+            background:#EFEFEF;
+            color:#6E6E6E;
+            border-bottom:solid 1px #E3E3E3;
+        }
+
+        :unresolved {
+            display: flex;
+            justify-content: center;
+            background: rgba(255,255,255,0.5);
+            border: 1px dashed #ccc;
+            border-radius: 5px;
+        }
+        :unresolved:after {
+            padding: 15px;
+            content: 'loading...';
+            color: #ccc;
+        }
+
+        /* drawer is always visible on a wide screen
+        so menu button isn't required */
+        core-drawer-panel:not([narrow]) #navicon {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body unresolved>
+<!-- Scafolding Area -->
+    <core-drawer-panel id="drawer">
+        <core-header-panel drawer  id="side-nav" mode="seamed">
+            <core-toolbar class="medium-tall">
+                <core-icon icon="face"></core-icon>
+                <span>Michael Onubogu</span>
+            </core-toolbar>
+
+            <core-menu selectedAttribute="">
+                <paper-item noink>
+                    <core-icon icon="home"></core-icon>
+                    <a href="#one">Hub</a>
+                    <paper-ripple fit></paper-ripple>
+                </paper-item>
+                <paper-item noink>
+                    <core-icon icon="view-module"></core-icon>
+                    <a href="#one">Sensors</a>
+                    <paper-ripple fit></paper-ripple>
+                </paper-item>
+                <paper-item noink>
+                    <core-icon icon="editor:insert-chart"></core-icon>
+                    <a href="#one">Stats</a>
+                    <paper-ripple fit></paper-ripple>
+                </paper-item>
+                <paper-item noink>
+                    <core-icon icon="shopping-cart"></core-icon>
+                    <a href="#one">Store</a>
+                    <paper-ripple fit></paper-ripple>
+                </paper-item>
+            </core-menu>
+            <core-menu>
+                <paper-item noink>
+                    <core-icon icon="settings"></core-icon>
+                    <a href="#one">Settings</a>
+                    <paper-ripple fit></paper-ripple>
+                </paper-item>
+                <paper-item noink>
+                    <core-icon icon="info"></core-icon>
+                    <a href="#one">About</a>
+                    <paper-ripple fit></paper-ripple>
+                </paper-item>
+            </core-menu>
+        </core-header-panel>
+
+        <core-header-panel id="content-section" mode="waterfall" main>
+            <core-toolbar>
+                <core-icon-button icon="menu" core-drawer-toggle id="side-nav-toggle"></core-icon-button>
+                <span flex>BITC Kitchen</span>
+                <paper-icon-button id="refresh_button" icon="refresh"></paper-icon-button>
+                <paper-icon-button id="morebutton" icon="more-vert"></paper-icon-button>
+            </core-toolbar>
+
+            <core-animated-pages  selected="0" transitions="slide-from-right" fit>
+                <section layout horizontal fit>
+                    <div id="editor">
+                    function foo(items) {
+                    var x = "All this is syntax highlighted";
+                    return x;
+                    }
+                    </div>
+                </section>
+            </core-animated-pages>
+        </core-header-panel>
+
+    </core-drawer-panel>
+	<script>
+        document.addEventListener('polymer-ready', function() {
+            //...
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/monokai");
+            editor.getSession().setMode("ace/mode/javascript");
+            editor.getSession().setUseSoftTabs(true);
+        });
+	</script>
+</body>
+</html>
