@@ -7,18 +7,13 @@
     <!-- Web Components Polyfils -->
     <script src="components/webcomponentsjs/webcomponents.js"></script>
     <link rel="import" href="imports/kitchen.html">
+    <link rel="import" href="imports/add-library.html">
 
     <style>
-        html,body {
-            height: 100%;
-            margin: 0;
-            background-color: #e5e5e5;
-            font-family: 'Grand Hotel', sans-serif;
-        }
-
         core-toolbar{
             background:#EF6C00;
             color: #fff;
+            height: 50px;
         }
 
         core-menu{
@@ -56,6 +51,10 @@
             border-bottom:solid 1px #E3E3E3;
         }
 
+        #action-bar > div > paper-button{
+            color:#777777;
+        }
+
         :unresolved {
             display: flex;
             justify-content: center;
@@ -79,78 +78,104 @@
 </head>
 
 <body unresolved>
-<!-- Scafolding Area -->
-    <core-drawer-panel id="drawer">
-        <core-header-panel drawer  id="side-nav" mode="seamed">
-            <core-toolbar class="medium-tall">
-                <core-icon icon="face"></core-icon>
-                <span>Michael Onubogu</span>
-            </core-toolbar>
-
-            <core-menu selectedAttribute="">
-                <paper-item noink>
-                    <core-icon icon="home"></core-icon>
-                    <a href="#one">Hub</a>
-                    <paper-ripple fit></paper-ripple>
-                </paper-item>
-                <paper-item noink>
-                    <core-icon icon="view-module"></core-icon>
-                    <a href="#one">Sensors</a>
-                    <paper-ripple fit></paper-ripple>
-                </paper-item>
-                <paper-item noink>
+    <div layout horizontal>
+        <section layout vertical id="action-bar" layout vertical center style="width:70px; height:100vh; background:#0C0C0C;">
+            <div>
+                <paper-button>
+                    <core-icon icon="av:play-arrow"></core-icon>
+                </paper-button>
+                <paper-button>
+                    <core-icon icon="folder"></core-icon>
+                </paper-button>
+                <paper-button>
+                    <core-icon icon="social:group"></core-icon>
+                </paper-button>
+                <paper-button>
+                    <core-icon icon="extension"></core-icon>
+                </paper-button>
+            </div>
+            <div flex></div>
+            <div>
+                <paper-button>
                     <core-icon icon="editor:insert-chart"></core-icon>
-                    <a href="#one">Stats</a>
-                    <paper-ripple fit></paper-ripple>
-                </paper-item>
-                <paper-item noink>
-                    <core-icon icon="shopping-cart"></core-icon>
-                    <a href="#one">Store</a>
-                    <paper-ripple fit></paper-ripple>
-                </paper-item>
-            </core-menu>
-            <core-menu>
-                <paper-item noink>
+                </paper-button>
+                <paper-button>
                     <core-icon icon="settings"></core-icon>
-                    <a href="#one">Settings</a>
-                    <paper-ripple fit></paper-ripple>
-                </paper-item>
-                <paper-item noink>
-                    <core-icon icon="info"></core-icon>
-                    <a href="#one">About</a>
-                    <paper-ripple fit></paper-ripple>
-                </paper-item>
-            </core-menu>
-        </core-header-panel>
+                </paper-button>
+            </div>
+        </section>
 
-        <core-header-panel id="content-section" mode="waterfall" main>
+        <section id="content-panel" layout vertical style="width:350px; height:100vh; background:#EEEEEE;">
+            <add-library></add-library>
+        </section>
+
+        <section id="code-window" layout vertical>
             <core-toolbar>
-                <core-icon-button icon="menu" core-drawer-toggle id="side-nav-toggle"></core-icon-button>
-                <span flex>BITC Kitchen</span>
-                <paper-icon-button id="refresh_button" icon="refresh"></paper-icon-button>
-                <paper-icon-button id="morebutton" icon="more-vert"></paper-icon-button>
+                <paper-tabs selected="0" wrap style="margin-top:-12px; overflow-x:auto;" noink noslide>
+                    <paper-tab>nam.js</paper-tab>
+                    <paper-tab>test.js</paper-tab>
+                </paper-tabs>
             </core-toolbar>
-
-            <core-animated-pages  selected="0" transitions="slide-from-right" fit>
-                <section layout horizontal fit>
-                    <div id="editor">
+            <core-pages selected="0">
+                <div id="editor" class="editor">
                     function foo(items) {
                     var x = "All this is syntax highlighted";
                     return x;
                     }
-                    </div>
-                </section>
-            </core-animated-pages>
-        </core-header-panel>
+                </div>
+                <div id="editor-2" class="editor">
+                    function foo(items) {
+                    var x = "All this is syntax highlighted";
+                    return x;
+                    }
+                </div>
+            </core-pages>
 
-    </core-drawer-panel>
+            <!--<div id="editor" class="editor">
+                function foo(items) {
+                var x = "All this is syntax highlighted";
+                return x;
+                }
+            </div>-->
+
+        </section>
+    </div>
+
+
 	<script>
         document.addEventListener('polymer-ready', function() {
+            //Set editor width
+            var window_width = $(window).width();
+            var action_bar_width = $('#action-bar').width();
+            var content_panel_width = $('#content-panel').width();
+
+            //height
+            var toolbar_height = $('core-toolbar').height();
+            var window_height = $(window).height();
+
+            var code_width = window_width - (action_bar_width + content_panel_width);
+            var code_height = window_height - toolbar_height;
+            $('#code-window').width(code_width).height(code_height);
+            $('.editor').width(code_width).height(code_height);
+
             //...
             var editor = ace.edit("editor");
             editor.setTheme("ace/theme/monokai");
             editor.getSession().setMode("ace/mode/javascript");
             editor.getSession().setUseSoftTabs(true);
+
+            var editor2 = ace.edit("editor-2");
+            editor2.setTheme("ace/theme/twilight");
+            editor2.getSession().setMode("ace/mode/javascript");
+            editor2.getSession().setUseSoftTabs(true);
+
+            //tabs
+            var tabs = $('paper-tabs')[0];
+            var pages = $('core-pages')[0];
+
+            tabs.addEventListener('core-select', function(){
+                pages.selected = tabs.selected;
+            });
         });
 	</script>
 </body>
