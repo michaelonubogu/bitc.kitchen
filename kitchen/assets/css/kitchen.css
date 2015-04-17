@@ -1,0 +1,115 @@
+html,body {
+    height: 100%;
+    margin: 0;
+    background-color: #e5e5e5;
+}
+
+[ng-cloak]{
+    display: none !important;
+}
+
+.editor{
+    display: none;
+}
+
+.action-bar{
+    height: 100vh !important;
+    background: #ffffff;
+    z-index:12;
+    color: #B5B5B5;
+    width:70px !important;
+}
+
+.content-panel{
+    width:350px;
+    height:100vh;
+    overflow-y:auto;
+}
+
+.content-panel-bar{
+    height:48px !important;
+    width: 100%;
+    top: 0 !important;
+    border-bottom: solid 1px #F2F2F2;
+}
+
+.content-panel-bar .content-panel-header{
+    font-size: 1.54rem;
+    align-content: center;
+    margin-left: 10px;
+    padding-top: 4px;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.content-panel-bar a{
+    display: block;
+    color: inherit;
+    margin-right: 10px;
+    align-content: center;
+}
+
+.content-panel-bar a:hover{
+    color: #E4E4E4;
+    cursor: pointer;
+}
+
+.search-library-area .input-field label{
+    color: #29b6f6;
+}
+
+.search-library-area .input-field input[type=text]:focus + label{
+    color: #29b6f6;
+}
+
+.search-library-area .input-field input[type=text]:focus{
+    border-bottom: 1px solid #29b6f6;
+    box-shadow: 0 1px 0 0 #29b6f6;
+}
+
+.search-library-area .input-field .prefix.active{
+    color: #29b6f6;
+}
+
+.search-library-results{
+    margin-top:60px;
+    padding: 0 20px;
+    height:74vh;
+    overflow-y:auto;
+
+}
+
+.search-library-results div{
+    font-size: 18px;
+    color: #546e7a;
+    margin-bottom:10px;
+}
+
+.code-menu-bar .code-menu-tabs .tab{
+    width:100px !important;
+    text-transform:lowercase !important;
+    font-size: 13px;
+}
+
+.code-menu-bar .code-menu-tabs .tab a{
+    color: #ffffff;
+}
+
+.code-menu-bar .code-menu-tabs .tab a:hover{
+    color: #ffca28;
+}
+
+.code-menu-bar .code-menu-tabs .tab a .active{
+    color: #ffca28 !important;
+}
+
+.code-menu-bar .code-menu-tabs .indicator{
+    height:4px;
+    background-color: #ffca28;
+}
+
+.action-item{
+    font-size:2.5rem !important;
+    align-self:center;
+    color: inherit;
+}

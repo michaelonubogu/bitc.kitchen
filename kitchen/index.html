@@ -1,182 +1,42 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="kitchen">
 <head>
-	<title>Kitchen</title>
+	<title>BITC - Kitchen</title>
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-    <!-- Web Components Polyfils -->
+    <!--web components-->
     <script src="components/webcomponentsjs/webcomponents.js"></script>
-    <link rel="import" href="imports/kitchen.html">
-    <link rel="import" href="imports/add-library.html">
 
-    <style>
-        core-toolbar{
-            background:#EF6C00;
-            color: #fff;
-            height: 50px;
-        }
+    <!--Roboto included with materialize-->
+    <!--<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>-->
+    <link rel="stylesheet" href="components/materialize/css/materialize.css">
+    <link rel="stylesheet" href="assets/css/kitchen.css">
 
-        core-menu{
-            margin: 0 auto;
-            color:#6E6E6E;
-            /*border-bottom:solid 1px #E3E3E3;*/
-            border-top:solid 1px #E6E6E6;
-        }
-
-        core-menu paper-item{
-            margin:10px 5px;
-        }
-
-        paper-item core-icon{
-            margin-right:7px;
-        }
-
-        paper-item a{
-            text-decoration:none !important;
-            color:#6E6E6E;
-        }
-
-        #sensor_grid{
-            padding:3.6% 0 3.6% 0;
-            padding-left:3.6%;
-        }
-
-        #side-nav{
-            background:#FAFAFA;
-        }
-
-        #side-nav core-toolbar{
-            background:#EFEFEF;
-            color:#6E6E6E;
-            border-bottom:solid 1px #E3E3E3;
-        }
-
-        #action-bar > div > paper-button{
-            color:#777777;
-        }
-
-        :unresolved {
-            display: flex;
-            justify-content: center;
-            background: rgba(255,255,255,0.5);
-            border: 1px dashed #ccc;
-            border-radius: 5px;
-        }
-        :unresolved:after {
-            padding: 15px;
-            content: 'loading...';
-            color: #ccc;
-        }
-
-        /* drawer is always visible on a wide screen
-        so menu button isn't required */
-        core-drawer-panel:not([narrow]) #navicon {
-            display: none;
-        }
-    </style>
-
+    <!--imports-->
+    <link rel="import" href="components/polymer-shims/layout.html">
 </head>
 
-<body unresolved>
-    <div layout horizontal>
-        <section layout vertical id="action-bar" layout vertical center style="width:70px; height:100vh; background:#0C0C0C;">
-            <div>
-                <paper-button>
-                    <core-icon icon="av:play-arrow"></core-icon>
-                </paper-button>
-                <paper-button>
-                    <core-icon icon="folder"></core-icon>
-                </paper-button>
-                <paper-button>
-                    <core-icon icon="social:group"></core-icon>
-                </paper-button>
-                <paper-button>
-                    <core-icon icon="extension"></core-icon>
-                </paper-button>
-            </div>
-            <div flex></div>
-            <div>
-                <paper-button>
-                    <core-icon icon="editor:insert-chart"></core-icon>
-                </paper-button>
-                <paper-button>
-                    <core-icon icon="settings"></core-icon>
-                </paper-button>
-            </div>
-        </section>
+<body ng-controller="AppController" ng-cloak>
+    <div ng-view></div>
 
-        <section id="content-panel" layout vertical style="width:350px; height:100vh; background:#EEEEEE;">
-            <add-library></add-library>
-        </section>
+    <script src="components/jquery-2.1.3.min.js"></script>
 
-        <section id="code-window" layout vertical>
-            <core-toolbar>
-                <paper-tabs selected="0" wrap style="margin-top:-12px; overflow-x:auto;" noink noslide>
-                    <paper-tab>nam.js</paper-tab>
-                    <paper-tab>test.js</paper-tab>
-                </paper-tabs>
-            </core-toolbar>
-            <core-pages selected="0">
-                <div id="editor" class="editor">
-                    function foo(items) {
-                    var x = "All this is syntax highlighted";
-                    return x;
-                    }
-                </div>
-                <div id="editor-2" class="editor">
-                    function foo(items) {
-                    var x = "All this is syntax highlighted";
-                    return x;
-                    }
-                </div>
-            </core-pages>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
 
-            <!--<div id="editor" class="editor">
-                function foo(items) {
-                var x = "All this is syntax highlighted";
-                return x;
-                }
-            </div>-->
+    <script src="components/ace-builds/src-noconflict/ace.js"></script>
 
-        </section>
-    </div>
+    <script src="components/date.js"></script>
+    <script src="components/underscore-min.js"></script>
 
-
+    <script src="kitchen.js"></script>
+    <script src="services.js"></script>
+    <script src="controller.js"></script>
 	<script>
-        document.addEventListener('polymer-ready', function() {
-            //Set editor width
-            var window_width = $(window).width();
-            var action_bar_width = $('#action-bar').width();
-            var content_panel_width = $('#content-panel').width();
 
-            //height
-            var toolbar_height = $('core-toolbar').height();
-            var window_height = $(window).height();
-
-            var code_width = window_width - (action_bar_width + content_panel_width);
-            var code_height = window_height - toolbar_height;
-            $('#code-window').width(code_width).height(code_height);
-            $('.editor').width(code_width).height(code_height);
-
-            //...
-            var editor = ace.edit("editor");
-            editor.setTheme("ace/theme/monokai");
-            editor.getSession().setMode("ace/mode/javascript");
-            editor.getSession().setUseSoftTabs(true);
-
-            var editor2 = ace.edit("editor-2");
-            editor2.setTheme("ace/theme/twilight");
-            editor2.getSession().setMode("ace/mode/javascript");
-            editor2.getSession().setUseSoftTabs(true);
-
-            //tabs
-            var tabs = $('paper-tabs')[0];
-            var pages = $('core-pages')[0];
-
-            tabs.addEventListener('core-select', function(){
-                pages.selected = tabs.selected;
-            });
-        });
 	</script>
 </body>
 </html>

@@ -29,7 +29,7 @@ module.exports = function(config) {
 
   switch (process.env.CHAI_TEST_ENV) {
     case 'sauce':
-      require('./karma.sauce')(config);
+      require('./karma.sauce.js')(config);
       break;
     default:
       // ...
