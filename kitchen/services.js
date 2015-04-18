@@ -27,4 +27,18 @@ angular.module('kitchen')
                 return (value === null || value === undefined);
             }
         }
+    })
+
+    .factory('kitchenAPI', function($http){
+
+        var apiUrl = 'http://localhost:3000/kitchen/api/';
+        var api = {
+            login: apiUrl + 'login'
+        };
+
+        return {
+            loginToGithub: function(){
+                return $http.get(api.login);
+            }
+        }
     });

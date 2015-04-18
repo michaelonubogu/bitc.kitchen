@@ -8,9 +8,10 @@ app.config(function ($routeProvider, $controllerProvider, $compileProvider, $fil
 
     $routeProvider
         .when('/home', {templateUrl: 'views/home.html', controller: 'HomeController'})
+        .when('/login', {templateUrl: 'views/login.html', controller: 'LoginController'})
         .when('/workspace', { templateUrl: 'views/workspace.html', controller: 'WorkspaceController' })
         .when('/workspace/:id', { templateUrl: 'views/workspace.html', controller: 'WorkspaceController' })
-        .otherwise({ redirectTo: '/workspace' });
+        .otherwise({ redirectTo: '/login' });
 })
 
     .run(['$rootScope', function($rootScope){

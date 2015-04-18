@@ -42,14 +42,33 @@ angular.module('kitchen')
     /*==========================================================================
      Landing Page Controller
      ==========================================================================*/
-    .controller('LoginController', ['$scope', '$http', 'localStorageFactory', function ($scope, $http, localStorageFactory) {
+    .controller('LoginController', ['$scope', '$http', 'localStorageFactory', 'kitchenAPI', function ($scope, $http, localStorageFactory, kitchenAPI) {
+
+        $scope.githubLogin = function(){
+            $http({
+                method: 'GET',
+                url: '/kitchen/api/login'
+            });
+            /*kitchenAPI.loginToGithub()
+                .success(function(data, status, headers){
+                    window.alert('SUCCESS');
+                })
+                .error(function(){
+
+                });*/
+        };
+
+        $scope.init = function(){
+
+        };
+
+        $scope.init();
     }])
 
     /*==========================================================================
      Content Panel Controller
      ==========================================================================*/
     .controller('ContentPanelController', ['$scope', '$http', '$location', 'kitchenUtils', '_', function ($scope, $http, $location, kitchenUtils,  _) {
-
 
     }])
 

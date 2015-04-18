@@ -12,6 +12,14 @@ html,body {
     display: none;
 }
 
+.landing-menu-bar{
+    padding: 0 20px;
+}
+
+.landing-jumbo-text{
+    text-shadow:0 2px 1px #7e7e7e;
+}
+
 .action-bar{
     height: 100vh !important;
     background: #ffffff;
