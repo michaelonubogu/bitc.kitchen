@@ -45,17 +45,13 @@ angular.module('kitchen')
     .controller('LoginController', ['$scope', '$http', 'localStorageFactory', 'kitchenAPI', function ($scope, $http, localStorageFactory, kitchenAPI) {
 
         $scope.githubLogin = function(){
-            $http({
-                method: 'GET',
-                url: '/kitchen/api/login'
-            });
-            /*kitchenAPI.loginToGithub()
+            kitchenAPI.loginToGithub()
                 .success(function(data, status, headers){
                     window.alert('SUCCESS');
                 })
                 .error(function(){
 
-                });*/
+                });
         };
 
         $scope.init = function(){
