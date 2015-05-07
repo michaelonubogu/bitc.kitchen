@@ -11,7 +11,7 @@ angular.module('kitchen')
         kitchen_service.getItem = function(key){
         };
 
-        kitchen_service.addItem = function(key, value){
+        kitchen_service.setItem = function(key, value){
         }
 
         return kitchen_service;

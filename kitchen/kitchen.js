@@ -10,6 +10,7 @@ app.config(function ($routeProvider, $controllerProvider, $compileProvider, $fil
         .when('/home', {templateUrl: 'views/home.html', controller: 'HomeController'})
         .when('/login', {templateUrl: 'views/login.html', controller: 'LoginController'})
         .when('/workspace', { templateUrl: 'views/workspace.html', controller: 'WorkspaceController' })
+        .when('/repobrowser', { templateUrl: 'views/repobrowser.html', controller: 'RepoBrowserController' })
         .when('/workspace/:id', { templateUrl: 'views/workspace.html', controller: 'WorkspaceController' })
         .otherwise({ redirectTo: '/login' });
 })

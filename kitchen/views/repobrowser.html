@@ -1,0 +1,47 @@
+<section layout vertical  ng-controller="RepoBrowserController" class="orange darken-1 white-text">
+    <div layout horizontal style="margin-top:5px; padding:10px 20px;">
+        <div>
+            <a class="dropdown-button btn orange darken-4 white-text" href="" data-activates="context_options" style="text-transform:none;">
+                <i class="mdi-navigation-arrow-drop-down right white-text"></i>{{selectedContext.login}}
+            </a>
+            <ul id="context_options" class="dropdown-content">
+                <li><a href="" ng-click="switchContext(githubUser.login, contextType.user)">{{githubUser.login}}</a></li>
+                <li ng-repeat="org in userOrgs"><a href="" ng-click="switchContext(org.login, contextType.org)">{{org.login}}</a></li>
+            </ul>
+        </div>
+        <div flex></div>
+        <img src="{{githubUser.avatar_url}}" class="circle small responsive-img" style= "width:40px; height:40px;">
+        <div><h6 class="white-text" style="margin-top:10%;">&nbsp;&nbsp;{{githubUser.name}}</h6></div>
+    </div>
+    <div layout horizontal center-center style="align-self:center; width:50%;">
+        <a href="" style="color:inherit;"><i class="medium mdi-file-cloud-upload text-title"></i></a>
+        <div flex center style="text-align:center;"><h3>Your Repositories</h3></div>
+        <a href="" style="color:inherit;"><i class="mdi-navigation-more-vert text-title" style="font-size:3rem;"></i></a>
+    </div>
+    <div><hr class="white white-text" style="width:60%; border-style:solid;"></div>
+    <div layout horizontal center-justified>
+        <ul class="collection z-depth-2" style="width:60%; margin-top:3%; background-color:transparent;">
+            <li class="collection-item collection-item-clear avatar" ng-repeat="repo in selectedRepos">
+                <div layout horizontal center style="height:100%;">
+                    <div layout vertical>
+                        <h4>{{repo.name}} <i ng-show="repo.fork" class="mdi-communication-call-split tooltipped" data-position="right" data-tooltip="forked" style="color:inherit !important; font-size:1.5rem;"></i></h4>
+                        <p>{{repo.description}}</p>
+                    </div>
+                    <div flex></div>
+                    <div>
+                        <a href="" class="tooltipped" data-position="top" data-tooltip="browse" style="text-decoration:none; color:inherit; cursor:pointer;">
+                            <i class="mdi-file-folder-open circle"></i>
+                        </a>
+                    </div>
+                    <div>&nbsp;&nbsp;&nbsp;</div>
+                    <div>
+                        <a href="" class="tooltipped" data-position="top" data-tooltip="edit" style="text-decoration:none; color:inherit; cursor:pointer;">
+                            <i class="mdi-content-create circle"></i>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>-4
+    <a self-end class="btn-floating btn-large waves-effect waves-light cyan accent-3" style="position:fixed;right:2%;bottom:5%;"><i class="mdi-content-add"></i></a>
+</section>

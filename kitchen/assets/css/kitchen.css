@@ -20,6 +20,10 @@ html,body {
     text-shadow:0 2px 1px #7e7e7e;
 }
 
+.text-title{
+    text-shadow:0 2px 1px #7e7e7e;
+}
+
 .action-bar{
     height: 100vh !important;
     background: #ffffff;
@@ -120,4 +124,26 @@ html,body {
     font-size:2.5rem !important;
     align-self:center;
     color: inherit;
+}
+
+.collection-item-clear{
+    /*background-color:transparent !important;
+    color: #ffffff !important;*/
+    height:150px !important;
+    vertical-align: middle !important;
+    color: #999999;
+}
+
+.collection-item-clear i{
+    color: #ffffff !important;
+}
+
+.collection .collection-item-clear.avatar .circle{
+    position: inherit;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    left: inherit;
+    display: inline-block;
+    vertical-align: middle;
 }
